@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           leading: const Icon(Icons.menu),
           backgroundColor: Colors.blue[400],
           iconTheme: const IconThemeData(color: Color.fromRGBO(235, 255, 0, 2.5)),
-           title: Text('Hello my girl'),
+           title: Text('Page title'),
            actions: [
           IconButton(
             icon: Icon(Icons.favorite),
@@ -53,12 +53,21 @@ body: ListView(
           // Add more items as needed
         ],
       ),
+                  floatingActionButton: Builder(
+                  builder: (BuildContext context) {
+                 return FloatingActionButton(
+                  onPressed: () => _dialogBuilder(context),
+                  child: Icon(Icons.add),
+                  backgroundColor: Colors.green,
+              );
+            },
+          ),
         bottomNavigationBar: BottomNavigationBar(items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.gavel), label: 'Buộc tội'),
+          BottomNavigationBarItem(icon: Icon(Icons.shape_line), label: 'Tròn vuông'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.rocket_launch), label: 'Phóng tên lửa'),
+              icon: Icon(Icons.cabin), label: 'Nhà máy'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.offline_bolt), label: 'Bật điện'),
+              icon: Icon(Icons.tab), label: 'Tệp tin'),
         ]),
       ),
     );
@@ -72,6 +81,43 @@ Widget _buildPhoneNumberItem(String name, String phoneNumber, IconData iconData)
     // Add other properties or widgets as needed
   );
 }
+Future<void> _dialogBuilder(BuildContext context) async {
+  showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Basic dialog title'),
+        content: const Text(
+          'A dialog is a type of modal window that\n'
+          'appears in front of app content to\n'
+          'provide critical information, or prompt\n'
+          'for a decision to be made.',
+        ),
+        actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Disable'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Enable'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
